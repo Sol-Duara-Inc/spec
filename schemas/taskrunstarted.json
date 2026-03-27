@@ -91,7 +91,10 @@
             }
           },
           "additionalProperties": false,
-          "type": "object"
+          "type": "object",
+          "required": [
+            "taskName"
+          ]
         }
       },
       "additionalProperties": false,
