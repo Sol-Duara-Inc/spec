@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://cdevents.dev/schemas/0.4.1/base-event.json",
+  "$id": "https://cdevents.dev/schemas/0.5.1/base-event.json",
   "title": "Conduit CDEvents Base Event",
   "description": "Base schema for all Conduit CDEvents. All Conduit event types extend this structure. Does not include customData or data — all event-specific payload belongs in subject.content.",
   "type": "object",
@@ -17,7 +17,7 @@
           "type": "string",
           "description": "CDEvents specification version this event conforms to.",
           "pattern": "^\\d+\\.\\d+\\.\\d+$",
-          "examples": ["0.4.1"]
+          "examples": ["0.5.1"]
         },
         "id": {
           "type": "string",
@@ -35,7 +35,7 @@
           "type": "string",
           "description": "Event type. For the Conduit base event this MUST be exactly: dev.cdevents.event.base.<major>.<minor>.<patch>.",
           "pattern": "^dev\\.cdevents\\.event\\.base\\.\\d+\\.\\d+\\.\\d+$",
-          "examples": ["dev.cdevents.event.base.0.4.1"]
+          "examples": ["dev.cdevents.event.base.0.5.1"]
         },
         "timestamp": {
           "type": "string",
@@ -47,7 +47,7 @@
           "type": "string",
           "description": "Absolute URI pointing to the JSON Schema that validates this event type.",
           "format": "uri",
-          "examples": ["https://cdevents.dev/schemas/0.4.1/base-event.json"]
+          "examples": ["https://cdevents.dev/schemas/0.5.1/base-event.json"]
         }
       }
     },
@@ -86,12 +86,12 @@
   "examples": [
     {
       "context": {
-        "version": "0.4.1",
+        "version": "0.5.1",
         "id": "550e8400-e29b-41d4-a716-446655440000",
         "source": "example.com/source",
-        "type": "dev.cdevents.event.base.0.4.1",
+        "type": "dev.cdevents.event.base.0.5.1",
         "timestamp": "2025-07-03T21:47:00.000Z",
-        "schemaUri": "https://cdevents.dev/schemas/0.4.1/base-event.json"
+        "schemaUri": "https://cdevents.dev/schemas/0.5.1/base-event.json"
       },
       "subject": {
         "id": "subject-123",
