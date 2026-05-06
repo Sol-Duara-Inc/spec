@@ -90,14 +90,19 @@
               ]
             },
             "outcome": {
-              "type": "string"
+              "type": "string",
+              "enum": ["success", "failure", "cancel", "error"]
             },
             "errors": {
               "type": "string"
             }
           },
           "additionalProperties": false,
-          "type": "object"
+          "type": "object",
+          "required": [
+            "taskName",
+            "outcome"
+          ]
         }
       },
       "additionalProperties": false,

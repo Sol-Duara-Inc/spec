@@ -137,7 +137,9 @@
           },
           "additionalProperties": false,
           "type": "object",
-          "required": []
+          "required": [
+            "environment"
+          ]
         }
       },
       "additionalProperties": false,
