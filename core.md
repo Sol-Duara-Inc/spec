@@ -21,7 +21,7 @@ The definition of *pipelines* and *tasks* is an authoring process, and has no ev
 | Subject | Description | Predicates |
 |---------|-------------|------------|
 | [`pipelineRun`](#pipelinerun) | An instance of a *pipeline* | [`queued`](#pipelinerun-queued), [`started`](#pipelinerun-started), [`finished`](#pipelinerun-finished)|
-| [`taskRun`](#taskrun) | An instance of a *task* | [`started`](#taskrun-started), [`finished`](#taskrun-finished)|
+| [`taskRun`](#taskrun) | An instance of a *task* | [`queued`](#taskrun-queued), [`started`](#taskrun-started), [`finished`](#taskrun-finished)|
 
 ### `pipelineRun`
 
@@ -52,7 +52,7 @@ associated, in which case it is acceptable to generate only taskRun events.
 |-------|------|-------------|----------|
 | id    | `String` | See [id](spec.md#id-subject)| `tenant1/12345-abcde`, `namespace/taskrun-1234` |
 | source | `URI-Reference` | See [source](spec.md#source-subject) | |
-| taskName  | `String` | The name of the pipeline | `MyPipeline`, `Unit tests for my repo` |
+| taskName  | `String` | The name of the task | `MyTask`, `Deploy to DEV stage` |
 | pipelineRun | `Object` ([`pipelineRun`](#pipelinerun)) | The `pipelineRun` that this `taskRun` belongs to. | `{"id": "namespace/pipelinerun-1234"}`|
 | outcome | `String` | outcome of a finished `taskRun` | `success`, `failure`, `cancel`, or `error` |
 | url | `URI` | url to the `taskRun` | `https://dashboard.org/namespace/taskrun-1234`, `https://api.cdsystem.com/namespace/taskrun-1234` |
@@ -109,6 +109,26 @@ A pipelineRun has finished, successfully or not.
 | outcome | `String (enum)` | outcome of a finished `pipelineRun` | `success`, `failure`, `cancel`, or `error` | `success`, `failure`, `cancel`, `error` |
 | errors | `String` | In case of error, canceled, or failed pipeline , provides details about the failure | `Invalid input param 123`, `Timeout during execution`, `pipelineRun canceled by user`, `Unit tests failed`| |
 
+### [`taskRun Queued`](conformance/taskrun_queued.json)
+
+This event represents when a taskRun has been queued for execution - and is waiting for applicable preconditions (resource availability, other tasks, etc.) to be fulfilled before actually executing.
+
+Adopters can choose to ignore these events if they don't apply to their use cases.
+
+A `taskRun.queued` event may be followed by `taskRun.started` or `taskRun.finished` for the **same** subject.
+
+- Event Type: __`dev.cdevents.taskrun.queued.0.1.0-draft`__
+- Predicate: queued
+- Subject: [`taskRun`](#taskrun)
+
+| Field | Type | Description | Examples | Required |
+|-------|------|-------------|----------|----------------------------|
+| id    | `String` | See [id](spec.md#id-subject)| `tenant1/12345-abcde`, `namespace/taskrun-1234` | ✅ |
+| source | `URI-Reference` | [source](spec.md#source) from the context | | |
+| taskName  | `String` | The name of the task | `MyTask`, `Deploy to DEV stage` | |
+| pipelineRun | `Object` ([`pipelineRun`](#pipelinerun)) | The `pipelineRun` that this `taskRun` belongs to. | `{"id": "namespace/pipelinerun-1234"}`| |
+| url | `URI` | url to the `taskRun` | `https://dashboard.org/namespace/taskrun-1234`, `https://api.cdsystem.com/namespace/taskrun-1234` | |
+
 ### [`taskRun Started`](conformance/taskrun_started.json)
 
 A taskRun has started and it is running.
@@ -121,7 +141,7 @@ A taskRun has started and it is running.
 |-------|------|-------------|----------|----------------------------|
 | id    | `String` | See [id](spec.md#id-subject)| `tenant1/12345-abcde`, `namespace/taskrun-1234` | ✅ |
 | source | `URI-Reference` | [source](spec.md#source) from the context | | |
-| taskName  | `String` | The name of the pipeline | `MyPipeline`, `Unit tests for my repo` | |
+| taskName  | `String` | The name of the task | `MyTask`, `Deploy to DEV stage` | |
 | pipelineRun | `Object` ([`pipelineRun`](#pipelinerun)) | The `pipelineRun` that this `taskRun` belongs to. | `{"id": "namespace/pipelinerun-1234"}`| |
 | url | `URI` | url to the `taskRun` | `https://dashboard.org/namespace/taskrun-1234`, `https://api.cdsystem.com/namespace/taskrun-1234` | |
 
@@ -137,7 +157,7 @@ A taskRun has finished, successfully or not.
 |-------|------|-------------|----------|----------------------------|
 | id    | `String` | See [id](spec.md#id-subject)| `tenant1/12345-abcde`, `namespace/taskrun-1234` | ✅ |
 | source | `URI-Reference` | [source](spec.md#source) from the context | | |
-| taskName  | `String` | The name of the pipeline | `MyPipeline`, `Unit tests for my repo` | |
+| taskName  | `String` | The name of the task | `MyTask`, `Deploy to DEV stage` | |
 | pipelineRun | `Object` ([`pipelineRun`](#pipelinerun)) | The `pipelineRun` that this `taskRun` belongs to. | `{"id": "namespace/pipelinerun-1234"}`| |
 | url | `URI` | url to the `taskRun` | `https://dashboard.org/namespace/taskrun-1234`, `https://api.cdsystem.com/namespace/taskrun-1234` | |
 | outcome | `String (enum)` | outcome of a finished `taskRun` | `success`, `failure`, `cancel`, or `error` | `success`, `failure`, `cancel`, `error` |
