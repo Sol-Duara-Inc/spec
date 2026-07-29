@@ -66,22 +66,16 @@
           "properties": {
             "artifactId": {
               "type": "string"
-            },
-            "outcome": {
-              "type": "string",
-              "enum": ["success", "failure", "cancel", "error"]
             }
           },
           "additionalProperties": false,
-          "type": "object",
-          "required": ["outcome"]
+          "type": "object"
         }
       },
       "additionalProperties": false,
       "type": "object",
       "required": [
         "id",
-        "source",
         "content"
       ]
     },

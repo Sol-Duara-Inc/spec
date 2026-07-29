@@ -72,7 +72,6 @@
       "type": "object",
       "required": [
         "id",
-        "source",
         "content"
       ]
     },
